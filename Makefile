@@ -53,10 +53,10 @@ CCADMIN=CCadmin
 all:
 	gcc -pthread -o client	client2.c -lm
 	gcc -pthread -o server	server2.c -lm
-	
+	gcc -pthread -o simulator simulator.c -lm
 #clean
 clean:
-	rm -rf	*o client server
+	rm -rf	*o client server simulator
 
 # build
 build: .build-post

@@ -74,7 +74,7 @@ void server(int socket_id) {
     struct packet receving_packet;
     char buffer[BUFSIZE];
     long index = 0;
-    float error_ratio = 0.1, total_time = 0.0;
+    float error_ratio = 0.001, total_time = 0.0;
     struct timeval start_t, end_t;
     lenght = sizeof (struct sockaddr_in);
     FILE *fp;
