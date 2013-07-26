@@ -11,6 +11,7 @@
 #include <sys/types.h> /* for pid_t */
 #include <sys/wait.h>
 #include <string.h> /* for wait */
+#include <pthread.h>
 
 /*
  * Simple C Test Suite
@@ -19,18 +20,34 @@
 void test1() {
     printf("simulator test 1\n");
     double delay = 100000;
+    int status;
+    pid_t pid;
+    pthread_mutex_t lock;
     
-    
-    
-    printf("running server\n");
-    system("gnome-terminal --window-with-profile=NAMEOFTHEPROFILE -e ./server ");
-    while(delay>=0){
-        delay--;
-    }
-    printf("running client\n");
-    system("gnome-terminal --window-with-profile=NAMEOFTHEPROFILE -e ./client ");
-    
+    pid = fork();
+    if(pid == 0){
+       pthread_mutex_lock(&lock);
+        printf("running server\n");
+        system("gnome-terminal --window-with-profile=NAMEOFTHEPROFILE -e ./server  ");
+        //system("gnome-terminal");
+        //execl("/home/sasitha/semester_06/network_programmming/git_project/UDP_Project/server", "server", (char*)NULL );
+        while(delay>=0){
+            delay--;
+        }
+        pthread_mutex_unlock(&lock);
+    }else{
+        pthread_mutex_lock(&lock);
+         printf("running client\n");
+        system("gnome-terminal  --window-with-profile=NAMEOFTHEPROFILE -x ./client  127.0.0.1");
+        //execl("/home/sasitha/semester_06/network_programmming/git_project/UDP_Project/client", "client", (char*)NULL );
+        
+        pthread_mutex_unlock(&lock);
+        waitpid(-1, &status, 0);
 }
+    }
+    
+    
+   
 
 void test2() {
     printf("simulator test 2\n");

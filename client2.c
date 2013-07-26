@@ -29,16 +29,15 @@ int main(int argc, char **argv) {
     struct FILE *fp;
 
 
-    /*checking for the correct arguments  
+    /*checking for the correct arguments */ 
      if (argc != 2) {
         printf("Enter the server ip address\n");
      }
-     * 
-     * */
+     
     /*gathering host information and printing them out if there is any error in
      host informations print the error and exit */
 
-    server_host = gethostbyname("127.0.0.1");
+    server_host = gethostbyname(argv[1]);
     if (server_host == NULL) {
         printf("error while getting host address by name\n");
         exit(0);

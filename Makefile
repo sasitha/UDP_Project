@@ -58,8 +58,11 @@ all:
 clean:
 	rm -rf	*o client server simulator
 
+#run
+run:
+	./simulator
 # build
-build: .build-post
+#build: .build-post
 
 #.build-pre:
 # Add your pre 'build' code here...
