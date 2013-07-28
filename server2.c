@@ -20,14 +20,16 @@
 #include<time.h>
 #include "headsock.h"
 #include<sys/time.h>
-void server(int);
+void server(int, long);
 void calculate_time(struct timeval*, struct timeval *);
 
-int main(int argc, char *argv) {
+int main(int argc, char **argv) {
 
     int socket_id, return_id;
     struct sockaddr_in my_address;
-    
+    long error_ratio;
+    /*getting error ratio*/
+    error_ratio = atof(argv[1]);
     
     /*creating socket */
     socket_id = socket(AF_INET, SOCK_DGRAM, 0);
@@ -57,7 +59,7 @@ int main(int argc, char *argv) {
     printf("ready to listn\n");
 
     /*calling server function to handle the client*/
-    server(socket_id);
+    server(socket_id, error_ratio);
 
     /*closing the socket and exiting */
     close(socket_id);
@@ -65,20 +67,20 @@ int main(int argc, char *argv) {
 }
 
 /*this server function will handle the client.*/
-void server(int socket_id) {
+void server(int socket_id, long error_r) {
 
     int receive_id = 0, lenght, send_id = 0, end = 1, received_data = 0, error_packet = 0, number_of_packets;
     int sq_root, random_number, is_error_detected = 0, number_of_error_packet = 0, error_packet_no = 0;
     struct ack_so ack;
     struct sockaddr_in addres;
     struct packet receving_packet;
-    char buffer[BUFSIZE];
+    char buffer[BUFSIZE], result[BUFSIZE];
     long index = 0;
-    float error_ratio = 0.1, total_time = 0.0;
+    float error_ratio = 0.0, total_time = 0.0;
     struct timeval start_t, end_t;
     lenght = sizeof (struct sockaddr_in);
-    FILE *fp;
-    
+    FILE *fp, *fp2;
+    error_ratio = (float)error_r;
     receive_id = recvfrom(socket_id, &receving_packet, sizeof (struct packet), 0, (struct sockaddr *) &addres, &lenght);
     if (receive_id == -1) {
         printf("error while reciveing packets\n");
@@ -184,7 +186,10 @@ void server(int socket_id) {
     printf("start time %d end time %d\n", start_t.tv_sec, end_t.tv_sec);
     calculate_time(&start_t, &end_t);
     total_time += (end_t.tv_sec);
-   
+    
+    
+    
+    
     printf("number of error packets %d\ntotal packets %d\n", number_of_error_packet, number_of_packets);
     printf("total time taken %.3f \n", total_time);
 

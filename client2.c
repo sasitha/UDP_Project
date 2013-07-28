@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
         case AF_INET:
             printf("AF_INTET\n");
             for (pptr = server_host->h_addr_list; *pptr != NULL; pptr++) {
-                printf("address:%d\n", inet_ntop(server_host->h_addrtype, *pptr, str, sizeof (str)));
+//                printf("address:%d\n", inet_ntop(server_host->h_addrtype, *pptr, str, sizeof (str)));
             }
 
             break;
