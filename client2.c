@@ -12,8 +12,8 @@
  */
 
 #include "headsock.h"
-#define MAX_SEQ_NO  20
-#define WINDOW_SIZE 10
+#define MAX_SEQ_NO  8
+#define WINDOW_SIZE 4
 void client(FILE *, int, struct sockaddr*, int);
 long rollback(int error_packet_no, int packet_length, int *number_of_packet);
 
@@ -29,11 +29,11 @@ int main(int argc, char **argv) {
     struct FILE *fp;
 
 
-    /*checking for the correct arguments */ 
-     if (argc != 2) {
+    /*checking for the correct arguments  */
+    if (argc != 2) {
         printf("Enter the server ip address\n");
-     }
-     
+    }
+
     /*gathering host information and printing them out if there is any error in
      host informations print the error and exit */
 

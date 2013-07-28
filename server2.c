@@ -66,7 +66,7 @@ int main(int argc, char *argv) {
 
 /*this server function will handle the client.*/
 void server(int socket_id) {
-   
+
     int receive_id = 0, lenght, send_id = 0, end = 1, received_data = 0, error_packet = 0, number_of_packets;
     int sq_root, random_number, is_error_detected = 0, number_of_error_packet = 0, error_packet_no = 0;
     struct ack_so ack;
@@ -74,7 +74,7 @@ void server(int socket_id) {
     struct packet receving_packet;
     char buffer[BUFSIZE];
     long index = 0;
-    float error_ratio = 0.001, total_time = 0.0;
+    float error_ratio = 0.1, total_time = 0.0;
     struct timeval start_t, end_t;
     lenght = sizeof (struct sockaddr_in);
     FILE *fp;
