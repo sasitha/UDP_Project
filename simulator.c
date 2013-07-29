@@ -26,23 +26,21 @@ void test1() {
     int count = 5;
     float error_ratio = 0.01;
     char *temp;
-    while(error_ratio<=0.1 && count >=0){
+    while(count >=0){
         count--;
-        error_ratio = error_ratio*10; 
+        
         client_str = "gnome-terminal  --window-with-profile=NAMEOFTHEPROFILE -x ./client  127.0.0.1";
         server_str = "gnome-terminal --window-with-profile=NAMEOFTHEPROFILE -x ./server ";
-        sprintf(temp, "%lld", error_ratio);
-        printf("%s\n", server_str);
-        printf("error ratio %0.3f\n", error_ratio);
-        printf("temp %s\n", temp);
-        //strcat(server_str, temp );
-       // printf("starting server\n");
-       // system(server_str);
+        
+        printf("starting server\n");
+        system(server_str);
+        printf("delay");       
         while(delay>=0){
-                delay--;
+            printf(".");
+            delay--;
         }
-        //printf("starting client\n");
-       // system(client_str);
+        printf("starting client\n");
+        system(client_str);
         
     }
     

@@ -20,16 +20,14 @@
 #include<time.h>
 #include "headsock.h"
 #include<sys/time.h>
-void server(int, long);
+void server(int, float);
 void calculate_time(struct timeval*, struct timeval *);
 
 int main(int argc, char **argv) {
 
     int socket_id, return_id;
     struct sockaddr_in my_address;
-    long error_ratio;
-    /*getting error ratio*/
-    error_ratio = atof(argv[1]);
+    float error_ratio;
     
     /*creating socket */
     socket_id = socket(AF_INET, SOCK_DGRAM, 0);
@@ -57,9 +55,17 @@ int main(int argc, char **argv) {
 
     /*listening to the socket */
     printf("ready to listn\n");
-
+    
+    /*setting up initial error ratio*/
+    error_ratio = 0.01;
+    
     /*calling server function to handle the client*/
-    server(socket_id, error_ratio);
+    while(1){
+        
+         server(socket_id, error_ratio);
+         error_ratio = error_ratio * 10;
+    }
+   
 
     /*closing the socket and exiting */
     close(socket_id);
@@ -67,7 +73,7 @@ int main(int argc, char **argv) {
 }
 
 /*this server function will handle the client.*/
-void server(int socket_id, long error_r) {
+void server(int socket_id, float error_r) {
 
     int receive_id = 0, lenght, send_id = 0, end = 1, received_data = 0, error_packet = 0, number_of_packets;
     int sq_root, random_number, is_error_detected = 0, number_of_error_packet = 0, error_packet_no = 0;
@@ -80,7 +86,9 @@ void server(int socket_id, long error_r) {
     struct timeval start_t, end_t;
     lenght = sizeof (struct sockaddr_in);
     FILE *fp, *fp2;
-    error_ratio = (float)error_r;
+    
+    error_ratio = error_r;
+    
     receive_id = recvfrom(socket_id, &receving_packet, sizeof (struct packet), 0, (struct sockaddr *) &addres, &lenght);
     if (receive_id == -1) {
         printf("error while reciveing packets\n");
