@@ -95,6 +95,8 @@ void server(int socket_id, float error_r) {
     clock_t start_c, end_c;
     
     error_ratio = error_r;
+    srand(time(NULL));
+    
     printf("simulating network with error ratio %.3f\n", error_ratio);
     receive_id = recvfrom(socket_id, &receving_packet, sizeof (struct packet), 0, (struct sockaddr *) &addres, &lenght);
     if (receive_id == -1) {
@@ -130,13 +132,10 @@ void server(int socket_id, float error_r) {
 
         }
         /*generating the error packet no*/
-        SEED = (int)time(NULL);
-        random_number = URandom(&SEED, sq_root);
-        //  printf("error data\trand no %dsq root %d\n\n", random_number, sq_root);
-        for(i=0;i<number_of_packets;i++){
-            count++;
-        }
-        if ((random_number <= sq_root * error_ratio) && is_error_detected == 0) {
+        random_number = rand()%number_of_packets;
+         // printf("error data\trand no %d\n\n", random_number);
+        
+        if ((random_number <= error_ratio * number_of_packets) && is_error_detected == 0) {
            // printf("error packet is generated with seq no %d \n", receving_packet.seq_num);
             error_packet = receving_packet.seq_num;
             error_packet_no = receving_packet.packet_number;

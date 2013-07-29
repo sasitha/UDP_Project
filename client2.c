@@ -13,7 +13,7 @@
 
 #include "headsock.h"
 #define MAX_SEQ_NO  8
-#define WINDOW_SIZE 1
+#define WINDOW_SIZE 4
 void client(FILE *, int, struct sockaddr*, int);
 long rollback(int error_packet_no, int packet_length, int *number_of_packet);
 
