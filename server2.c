@@ -20,8 +20,12 @@
 #include<time.h>
 #include "headsock.h"
 #include<sys/time.h>
+#include <signal.h>
 void server(int, float);
 void calculate_time(struct timeval*, struct timeval *);
+double URandom(uint32_t *uPtr, double max);
+
+int SEED;
 
 int main(int argc, char **argv) {
 
@@ -53,17 +57,18 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
-    /*listening to the socket */
-    printf("ready to listn\n");
+    
     
     /*setting up initial error ratio*/
-    error_ratio = 0.01;
+    error_ratio = 0.1;
     
     /*calling server function to handle the client*/
     while(1){
         
+        /*listening to the socket */
+         printf("ready to listn\n");
          server(socket_id, error_ratio);
-         error_ratio = error_ratio * 10;
+         error_ratio = error_ratio +0.1;
     }
    
 
@@ -76,24 +81,27 @@ int main(int argc, char **argv) {
 void server(int socket_id, float error_r) {
 
     int receive_id = 0, lenght, send_id = 0, end = 1, received_data = 0, error_packet = 0, number_of_packets;
-    int sq_root, random_number, is_error_detected = 0, number_of_error_packet = 0, error_packet_no = 0;
+    int sq_root, random_number, is_error_detected = 0, number_of_error_packet = 0, error_packet_no = 0, i, count;
     struct ack_so ack;
     struct sockaddr_in addres;
     struct packet receving_packet;
     char buffer[BUFSIZE], result[BUFSIZE];
     long index = 0;
-    float error_ratio = 0.0, total_time = 0.0;
+    float error_ratio , total_time = 0.0;
     struct timeval start_t, end_t;
     lenght = sizeof (struct sockaddr_in);
     FILE *fp, *fp2;
     
-    error_ratio = error_r;
+    clock_t start_c, end_c;
     
+    error_ratio = error_r;
+    printf("simulating network with error ratio %.3f\n", error_ratio);
     receive_id = recvfrom(socket_id, &receving_packet, sizeof (struct packet), 0, (struct sockaddr *) &addres, &lenght);
     if (receive_id == -1) {
         printf("error while reciveing packets\n");
     }
     gettimeofday(&start_t, NULL);
+    start_c = clock();
     number_of_packets = receving_packet.no_of_packets;
     printf("number of packets about to received\t%d\n\n", number_of_packets);
     sq_root = sqrt(number_of_packets);
@@ -122,11 +130,14 @@ void server(int socket_id, float error_r) {
 
         }
         /*generating the error packet no*/
-        random_number = rand() % (int) sq_root;
+        SEED = (int)time(NULL);
+        random_number = URandom(&SEED, sq_root);
         //  printf("error data\trand no %dsq root %d\n\n", random_number, sq_root);
-
+        for(i=0;i<number_of_packets;i++){
+            count++;
+        }
         if ((random_number <= sq_root * error_ratio) && is_error_detected == 0) {
-            printf("error packet is generated with seq no %d \n", receving_packet.seq_num);
+           // printf("error packet is generated with seq no %d \n", receving_packet.seq_num);
             error_packet = receving_packet.seq_num;
             error_packet_no = receving_packet.packet_number;
             is_error_detected = 1;
@@ -144,10 +155,10 @@ void server(int socket_id, float error_r) {
             index += received_data;
 
             /*printing data about the receiving packet*/
-            printf("received packet with seq no %d\t"
-                    "and window end bit is %d\t"
-                    "number of bit\t%d"
-                    "data \t%d\n", receving_packet.seq_num, receving_packet.window_end, receive_id, strlen(receving_packet.data));
+          //  printf("received packet with seq no %d\t"
+          //          "and window end bit is %d\t"
+          //          "number of bit\t%d"
+          //          "data \t%d\n", receving_packet.seq_num, receving_packet.window_end, receive_id, strlen(receving_packet.data));
 
         }
 
@@ -158,7 +169,7 @@ void server(int socket_id, float error_r) {
                 ack.ack_type = 0;
                 ack.error_seq_no = error_packet;
                 ack.error_packet = error_packet_no;
-                printf("detected errors sending negative ack with error packet sequence number %d \n", ack.error_seq_no);
+              //  printf("detected errors sending negative ack with error packet sequence number %d \n", ack.error_seq_no);
                 send_id = sendto(socket_id, &ack, sizeof (struct ack_so), 0, (struct sockaddr*) &addres, lenght);
                 if (send_id == -1) {
                     printf("ack sending fail\n");
@@ -168,7 +179,7 @@ void server(int socket_id, float error_r) {
                 // printf("is error detected disabled\n");
             } else {
                 /*no errors*/
-                printf("no errors sending positive ack\n");
+              //  printf("no errors sending positive ack\n");
                 ack.ack_type = 1;
                 send_id = sendto(socket_id, &ack, sizeof (struct ack_so), 0, (struct sockaddr*) &addres, lenght);
                 if (send_id == -1) {
@@ -189,18 +200,19 @@ void server(int socket_id, float error_r) {
     strcat(buffer, "\n");
     fwrite(buffer, 1, index+1, fp);
     fclose(fp);
-     printf("file has completely saved\n");
+    // printf("file has completely saved\n");
     gettimeofday(&end_t, NULL);
-    printf("start time %d end time %d\n", start_t.tv_sec, end_t.tv_sec);
-    calculate_time(&start_t, &end_t);
+    end_c = clock();
+   // printf("start time %d end time %d\n", start_t.tv_sec, end_t.tv_sec);
+    calculate_time( &end_t, &start_t);
     total_time += (end_t.tv_sec);
     
     
     
     
     printf("number of error packets %d\ntotal packets %d\n", number_of_error_packet, number_of_packets);
-    printf("total time taken %.3f \n", total_time);
-
+    printf("total time taken %d \n\n\n\n", ((end_c*10000) - (start_c*10000)));
+    
 }
 
 void calculate_time(struct timeval *start, struct timeval *end){
@@ -212,5 +224,9 @@ void calculate_time(struct timeval *start, struct timeval *end){
     start->tv_sec -= end->tv_sec;
 }
 
-
+double URandom(uint32_t *uPtr, double max){
+    
+	*uPtr = (3141592653 * (*uPtr) + 2718281829) & MAXINT;
+	return ((double) *uPtr / (double) MAXINT * max);
+}
 

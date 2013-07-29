@@ -13,7 +13,7 @@
 
 #include "headsock.h"
 #define MAX_SEQ_NO  8
-#define WINDOW_SIZE 4
+#define WINDOW_SIZE 1
 void client(FILE *, int, struct sockaddr*, int);
 long rollback(int error_packet_no, int packet_length, int *number_of_packet);
 
@@ -109,7 +109,7 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
     struct packet sending_packet;
     current_index = 0;
 
-
+    
     /*finding the size of the file */
     fseek(fp, 0, SEEK_END);
     file_size = ftell(fp);

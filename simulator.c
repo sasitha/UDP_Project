@@ -21,34 +21,37 @@
 
 void test1() {
     printf("simulator test 1\n");
-    double delay = 10;
-    char *client_str, *server_str;
-    int count = 5;
-    float error_ratio = 0.01;
-    char *temp;
-    while(count >=0){
+    double delay = 100, wait = 1000000;
+    char *client_str, *server_str, *server_str2;
+    int count = 2, buf, status;
+    pid_t pid;
+    
+    client_str = "gnome-terminal  --window-with-profile=NAMEOFTHEPROFILE -x ./client  127.0.0.1 ";
+    
+    server_str = "gnome-terminal --window-with-profile=NAMEOFTHEPROFILE -x ./server ";
+    server_str2 = "./server";
+    printf("starting server\n");
+    system(server_str);
+    while (count > 0) {
         count--;
-        
-        client_str = "gnome-terminal  --window-with-profile=NAMEOFTHEPROFILE -x ./client  127.0.0.1";
-        server_str = "gnome-terminal --window-with-profile=NAMEOFTHEPROFILE -x ./server ";
-        
-        printf("starting server\n");
-        system(server_str);
-        printf("delay");       
-        while(delay>=0){
+        printf("delay");
+        while (delay >= 0) {
             printf(".");
             delay--;
         }
-        printf("starting client\n");
+        delay = 100;
+        printf("\n");     
+         printf("starting client\n");
         system(client_str);
+        while(wait>=0){
+            wait--;
+        }
+        wait = 1000000;
         
     }
-    
-    
-}
 
-    
-   
+
+}
 
 void test2() {
     printf("simulator test 2\n");
@@ -62,7 +65,7 @@ int main(int argc, char** argv) {
     printf("%%TEST_STARTED%% test1 (simulator)\n");
     test1();
     printf("%%TEST_FINISHED%% time=0 test1 (simulator) \n");
-    
+
     /*
      *  printf("%%TEST_STARTED%% test2 (simulator)\n");
     test2();
@@ -70,7 +73,7 @@ int main(int argc, char** argv) {
 
     printf("%%SUITE_FINISHED%% time=0\n");
      */
-   
+
 
     return (EXIT_SUCCESS);
 }
