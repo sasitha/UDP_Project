@@ -507,4 +507,4 @@ configure:1084: result: i686-pc-linux-gnu
 configure:1141: checking for gcc
 configure:1156: found /usr/bin/gcc
 configure:1164: result: gcc
-c
+configure:1392: checking for C compiler version

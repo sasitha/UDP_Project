@@ -56,8 +56,6 @@ int main(int argc, char **argv) {
         printf("error while binding\n");
         exit(1);
     }
-
-    
     
     /*setting up initial error ratio*/
     error_ratio = 0.1;
@@ -68,10 +66,9 @@ int main(int argc, char **argv) {
         /*listening to the socket */
          printf("ready to listn\n");
          server(socket_id, error_ratio);
-         error_ratio = error_ratio +0.1;
+         error_ratio = error_ratio +0.01;
     }
-   
-
+    
     /*closing the socket and exiting */
     close(socket_id);
     exit(0);
@@ -152,14 +149,7 @@ void server(int socket_id, float error_r) {
             /*copping data to the buffer*/
             memmove((buffer + index), receving_packet.data, received_data);
             /*increasing the index of the buffer*/
-            index += received_data;
-
-            /*printing data about the receiving packet*/
-           printf("saved packet with seq no %d\t"
-                    "and window end bit is %d\t"
-                   "number of bit\t%d"
-                  "data \t%d\n", receving_packet.seq_num, receving_packet.window_end, receive_id, strlen(receving_packet.data));
-
+            index += received_data;    
         }
 
         if (receving_packet.window_end == 1) {
@@ -206,10 +196,6 @@ void server(int socket_id, float error_r) {
    // printf("start time %d end time %d\n", start_t.tv_sec, end_t.tv_sec);
     calculate_time( &end_t, &start_t);
     total_time  = (end_t.tv_sec)*1000.0 + (end_t.tv_usec)/1000.0 ;
-    
-    
-    
-    
     printf("number of error packets %d\ntotal packets %d\n", number_of_error_packet, number_of_packets);
     printf("total time taken %.1f \n\n\n\n", total_time );
     
