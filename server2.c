@@ -204,23 +204,24 @@ void server(int socket_id, float error_r) {
     end_c = clock();
    // printf("start time %d end time %d\n", start_t.tv_sec, end_t.tv_sec);
     calculate_time( &end_t, &start_t);
-    total_time += (end_t.tv_sec);
+    total_time  += (end_t.tv_sec)*1000.0 + (end_t.tv_usec)/1000.0 ;
     
     
     
     
     printf("number of error packets %d\ntotal packets %d\n", number_of_error_packet, number_of_packets);
-    printf("total time taken %d \n\n\n\n", ((end_c*10000) - (start_c*10000)));
+    printf("total time taken %.1f \n\n\n\n", total_time );
     
 }
 
-void calculate_time(struct timeval *start, struct timeval *end){
+void calculate_time(struct timeval *end, struct timeval *start){
     
-    if((start->tv_usec -= end->tv_usec)<0){
-        --start->tv_sec;
-        start->tv_usec += 1000000;
+    if((end->tv_usec -= start->tv_usec)<=0){
+        --end->tv_sec;
+        end->tv_usec += 1000000;
     }
-    start->tv_sec -= end->tv_sec;
+    end->tv_sec -= start->tv_sec;
+   
 }
 
 double URandom(uint32_t *uPtr, double max){
