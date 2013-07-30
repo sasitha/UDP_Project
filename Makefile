@@ -54,9 +54,12 @@ all:
 	gcc -pthread -o client	client2.c -lm
 	gcc -pthread -o server	server2.c -lm
 	gcc -pthread -o simulator simulator.c -lm
+	
+	gcc -pthread -o client3	 client3.c -lm
+	gcc -pthread -o server3	 server3.c -lm
 #clean
 clean:
-	rm -rf	*o client server simulator
+	rm -rf	*o client server simulator client3 server3
 
 #run
 run:
