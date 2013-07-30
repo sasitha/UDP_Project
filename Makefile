@@ -64,6 +64,7 @@ clean:
 #run
 run:
 	./simulator
+	
 # build
 #build: .build-post
 

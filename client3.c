@@ -149,12 +149,12 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
         }
         
         if(re_transmited == 1){
-            printf("retransmitting \n");
+           // printf("retransmitting \n");
             re_transmited = 0;
             memcpy(sending_packet.data, (file_buffer+current_index), packet_length);
             seq_num = (packet_count % MAX_SEQ_NO) + 1;
             sending_packet.seq_num = seq_num;
-            sending_packet.window_end = 1;
+            sending_packet.window_end = 0;
             sending_packet.packet_number = packet_count;
             
             printf("re transmitting packet with seq no %d\n", seq_num);

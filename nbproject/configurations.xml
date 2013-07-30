@@ -3,8 +3,10 @@
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df name="UDP_Project" root=".">
       <in>client2.c</in>
+      <in>client3.c</in>
       <in>headsock.h</in>
       <in>server2.c</in>
+      <in>server3.c</in>
       <in>simulator.c</in>
     </df>
     <logicalFolder name="ExternalFiles"

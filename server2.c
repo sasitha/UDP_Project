@@ -141,6 +141,7 @@ void server(int socket_id, float error_r) {
             error_packet_no = receving_packet.packet_number;
             is_error_detected = 1;
             //printf("is error detected activated\n");
+            
             number_of_error_packet++;
         }
 
@@ -154,10 +155,10 @@ void server(int socket_id, float error_r) {
             index += received_data;
 
             /*printing data about the receiving packet*/
-          //  printf("received packet with seq no %d\t"
-          //          "and window end bit is %d\t"
-          //          "number of bit\t%d"
-          //          "data \t%d\n", receving_packet.seq_num, receving_packet.window_end, receive_id, strlen(receving_packet.data));
+           printf("saved packet with seq no %d\t"
+                    "and window end bit is %d\t"
+                   "number of bit\t%d"
+                  "data \t%d\n", receving_packet.seq_num, receving_packet.window_end, receive_id, strlen(receving_packet.data));
 
         }
 
@@ -168,7 +169,7 @@ void server(int socket_id, float error_r) {
                 ack.ack_type = 0;
                 ack.error_seq_no = error_packet;
                 ack.error_packet = error_packet_no;
-              //  printf("detected errors sending negative ack with error packet sequence number %d \n", ack.error_seq_no);
+               //printf("detected errors sending negative ack with error packet sequence number %d \n", ack.error_seq_no);
                 send_id = sendto(socket_id, &ack, sizeof (struct ack_so), 0, (struct sockaddr*) &addres, lenght);
                 if (send_id == -1) {
                     printf("ack sending fail\n");
@@ -178,7 +179,7 @@ void server(int socket_id, float error_r) {
                 // printf("is error detected disabled\n");
             } else {
                 /*no errors*/
-              //  printf("no errors sending positive ack\n");
+               //printf("no errors sending positive ack\n");
                 ack.ack_type = 1;
                 send_id = sendto(socket_id, &ack, sizeof (struct ack_so), 0, (struct sockaddr*) &addres, lenght);
                 if (send_id == -1) {

@@ -63,94 +63,6 @@ PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
 ## Core tests.  ##
 ## ------------ ##
 
-configure:941: PATH=".;."; $? = 127
-configure:1024: checking build system type
-configure:1042: result: i686-pc-linux-gnu
-configconftest.sh
-/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
-configure:944: ure:1049: checking host system type
-configure:1063: result: i686-pc-linux-gnu
-configure:1070: checking target system type
-configure:1084: result: i686-pc-linux-gnu
-configure:1141: checking for gcc
-configure:1156: found /usr/bin/gcc
-configure:1164: result: gcc
-configure:1392: checking for C compiler version
-/bin/arch              = i686
-/usr/bin/arch -k       = unknown
-/usr/convex/getsysinfo = unknbin
-
-## ------------ ##
-## Core tests.  ##
-## ------------ ##
-
-configure:941: PATH=".;."; conftest.sh
-/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
-configure:944: $? = 127
-configure:1024: checking build system type
-configure:1042: result: i686-pc-linux-gnu
-configure:1049: system type
-configure:1084: result: i686-pc-linux-gnu
-configure:1141: checking for gcc
-configure:1156: found /usr/bin/gcc
-configure:1164: result: gcc
-configure:1392: checking for C compiler version
-/bfo               = unknown
-/bin/machine           = unknown
-/usr/bin/oslevel       = unknown
-/bin/unchecking host system type
-configure:1063: result: i686-pc-linux-gnu
-configure:1070: checking target qun/otcl-1.8/configure: line 942: conftest.sh: command not found
-configure:944: $? = 127
-configure:1fo               = unknown
-/bin/machine           = unknown
-/usr/bin/oslevel       = unknown
-/bin/un024: checking build system type
-configure:1042: result: i686-pc-linux-gnu
-configure:1049: checking host system type
-configure:1063: result: i686-pc-linux-gnu
-configure:1070: checking target system type
-configure:1084: result: i686-pc-linux-gnu
-configure:1141: checking for gcc
-configure:1156: found /in/arch              = i686
-/usr/bin/arch -k       = unknown
-/usr/convex/getsysinfo = unknown
-hostinusr/bin/gcc
-configure:1164: result: gcc
-configure:1392: checking for C compiler version
-/bin/arch              = i686
-/usr/bin/arch -k       = unknown
-/usr/convex/getsysinfo = unknown
-hostinfo               = unknown
-/bin/machine           = unknown
-/usr/bin/oslevel       = unknown
-/bin/universe     ##
-## Core tests.  ##
-## ------------ ##
-
-configure:941: PATH=".;."; conftest.sh
-/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
-configure:944: $? = 127
-configure:1024: checking build system type
-configure:1042: result: i686-pc-linux-gnu
-configure:1049: checking host system      = unknown
-
-PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
-
-## ------------ type
-configure:1063: result: i686-pc-linux-gnu
-configure:1070: checking target system type
-configure:1084: result: i686-pc-linux-gnu
-configure:1141: checking for gcc
-configure:1156: found /usr/bin/gcc
-configure:1164: result: gcc
-configure:1392: checking for C compiler version
-/bin/arch             nknown
-/bin/machine           = unknown
-/usr/bin/oslevel       = unknown
-/bin/universe          = une tests.  ##
-## ------------ ##
-
 configure:941: PATH=".;."; conftest.sh
 /home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
 configure:944: $? = 127
@@ -164,53 +76,6 @@ configure:1141: checking for gcc
 configure:1156: found /usr/bin/gcc
 configure:1164: result: gcc
 configure:1392: checking for C compiler version
-/bin/arch              = i686
-/uH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
-
-## ------------ ##
-## Core tests.  ##
-## ------------ ##
-
-configure:941: PATH=".;."; conftest.sh
-/home/zhqun/otcl-1.8/configure: line 9e
-configure:1042: result: i686-pc-linux-gnu
-configure:1049: checking host system type
-configure:1063: result: i686-pc-linux-gnu
-configure:1070: checking target system type
-configure:1084: result: i686sr/bin/arch -k       = unknown
-/usr/convex/getsysinfo = unknown
-hostinfo               = unknown
-/bi-pc-linux-gnu
-configure:1141: checking for gcc
-configure:1156: found /usr/bin/gcc
-configure:1164: result: gcc
-configure:1392: checking for C compiler version
-/bin/arch              = i686
-/usr/bin/arch -k       = unknown
-/usr/convex/getsysinfo = unknown
-hostinfo               = unknown
-/bin/machine           = unknown
-/usr/bin/oslevel       = unknown
-/bin/universe          = unknown
-
-PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
-
-## ------------ ##
-## Core tests.  ##
-## ------------ ##
-
-configure:941: PATH=".;."; conftest.sh
-/home/zhqun/otcl-1.8/configure: line 942: conftee:1042: result: i686-pc-linux-gnu
-configure:1049: checking host system type
-configure:1063: result: i686-pc-linux-gnu
-configure:1070: checking target system type
-configure:1084: result: i686-pc-linux-gnu
-configure:1141: checking for gcc
-configure:1156: found /usr/bin/gcc
-configure:1164: result: gcc
-configure:1392: checking for C compiler version
-/bin/arch              = i686
-/usr/bin/arch -k      configure:1392: checking for C compiler version
 /bin/arch              = i686
 /usr/bin/arch -k       = unknown
 /usr/convex/getsysinfo = unknown
@@ -234,36 +99,6 @@ configure:1049: checking host system type
 configure:1063: result: i686-pc-linux-gnu
 configure:1070: checking target system type
 configure:1084: result: i686-pc-linux-gnu
-configconfigure:1392: checking for C compiler version
-/bin/arch              = i686
-/usr/bin/arch -k      ure:1141: checking for gcc
-configure:1156: found /usr/bin/gcc
-configure:1164: result: gcc
-configure:1392: checking for C compiler version
-/bin/arch              = i686
-/usr/bin/arch -k       = unknown
-/usr/convex/getsysinfo = unknown
-hostinfo               = unknown
-/bin/machine           = unknown
-usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
-
-## ------------ ##
-## Core tests.  ##
-## ------------ #/usr/bin/oslevel       = unknown
-/bin/universe          = unknown
-
-PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
-
-## ------------ ##
-## Core tests.  ##
-## ------------ ##
-
-configure:941: PATH=".;."; conftest.sh
-/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not f-pc-linux-gnu
-configure:1049: checking host system type
-configure:1063: result: i686-pc-linux-gnu
-configure:1070: checking target system type
-configure:1084: result: i686-pc-linux-gnu
 configure:1141: checking for gcc
 configure:1156: found /usr/bin/gcc
 configure:1164: result: gcc
@@ -273,7 +108,10 @@ configure:1392: checking for C compiler version
 /usr/convex/getsysinfo = unknown
 hostinfo               = unknown
 /bin/machine           = unknown
-/usr/bin/o1R6/bin:/home/zhqun/bin
+/usr/bin/oslevel       = unknown
+/bin/universe          = unknown
+
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
 
 ## ------------ ##
 ## Core tests.  ##
@@ -294,7 +132,10 @@ configure:1164: result: gcc
 configure:1392: checking for C compiler version
 /bin/arch              = i686
 /usr/bin/arch -k       = unknown
-/usr/convex/getsysi   = unknown
+/usr/convex/getsysinfo = unknown
+hostinfo               = unknown
+/bin/machine           = unknown
+/usr/bin/oslevel       = unknown
 /bin/universe          = unknown
 
 PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
@@ -362,74 +203,10 @@ configure:941: PATH=".;."; conftest.sh
 configure:944: $? = 127
 configure:1024: checking build system type
 configure:1042: result: i686-pc-linux-gnu
-configure:1049: checking he
-configure:1084: result: i686-pc-linux-gnu
-configure:1141: checking for gcc
-configure:1156: found /usr/bin/gcc
-configure:1164: result: gcc
-configure:1392: checking for C compiler version
-/bin/arch              = i686
-/usr/bin/arch -k       = unknown
-/usr/convex/getsysinfo = unknown
-hostinfo               = unknown
-/bin/machine           = unknown
-/usr/bin/oslevel       = unknown
-/bin/universe          = unknown
-
-PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
-
-## ------------           = i686
-/usr/bin/arch -k       = unknown
-/usr/convex/getsysinfo = unknown
-hostinfo         ##
-## Core tests.  ##
-## ------------ ##
-
-configure:941: PATH=".;."; conftest.sh
-/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
-configure:944: $? = 127
-configure:1024: checking build system type
-configure:1042: result: i686-pc-linux-gnu
-configure:1049: checking host systeme
-configure:1084: result: i686-pc-linux-gnu
-configure:1141: checking for gcc
-configure:1156: found / type
-configure:1063: result: i686-pc-linux-gnu
-configure:1070: checking target system type
-configure:1084: result: i686-pc-linux-gnu
-configure:1141: checking for gcc
-configure:1156: found /usr/bin/gcc
-configure:1164: result: gcc
-configure:1392: checking for C compiler version
-/bin/arch              type
-configure:1063: result: i686-pc-linux-gnu
-configure:1070: checking target system type
-configur = i686
-/usr/bin/arch -k       = unknown
-/usr/convex/getsysinfo = unknown
-hostinfo               = unknown
-/bin/machine           = unknown
-/usr/bin/oslevel       = unknown
-/bin/universe          = unknown
-
-PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
-
-## ------------ ##
-## Core tests.  ##
-## ------------ ##
-
-configure:941: PATH=".;."; conftest.sh
-/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
-configure:944: $? = 127
-configure:1024: checking build system type
-configure:1042: result: i686-pc-linux-gnu
 configure:1049: checking host system type
 configure:1063: result: i686-pc-linux-gnu
 configure:1070: checking target system type
-configure:1084: resystem type
-configure:1042: result: i686-pc-linux-gnu
-configure:1049: checking host system type
-confsult: i686-pc-linux-gnu
+configure:1084: result: i686-pc-linux-gnu
 configure:1141: checking for gcc
 configure:1156: found /usr/bin/gcc
 configure:1164: result: gcc
@@ -479,8 +256,255 @@ configure:941: PATH=".;."; conftest.sh
 /home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
 configure:944: $? = 127
 configure:1024: checking build system type
-configurgnu
+configure:1042: result: i686-pc-linux-gnu
+configure:1049: checking host system type
+configure:1063: result: i686-pc-linux-gnu
+configure:1070: checking target system type
+configure:1084: result: i686-pc-linux-gnu
 configure:1141: checking for gcc
 configure:1156: found /usr/bin/gcc
 configure:1164: result: gcc
+configure:1392: checking for C compiler version
+/bin/arch              = i686
+/usr/bin/arch -k       = unknown
+/usr/convex/getsysinfo = unknown
+hostinfo               = unknown
+/bin/machine           = unknown
+/usr/bin/oslevel       = unknown
+/bin/universe          = unknown
 
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
+
+## ------------ ##
+## Core tests.  ##
+## ------------ ##
+
+configure:941: PATH=".;."; conftest.sh
+/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
+configure:944: $? = 127
+configure:1024: checking build system type
+configure:1042: result: i686-pc-linux-gnu
+configure:1049: checking host system type
+configure:1063: result: i686-pc-linux-gnu
+configure:1070: checking target system type
+configure:1084: result: i686-pc-linux-gnu
+configure:1141: checking for gcc
+configure:1156: found /usr/bin/gcc
+configure:1164: result: gcc
+configure:1392: checking for C compiler version
+/bin/arch              = i686
+/usr/bin/arch -k       = unknown
+/usr/convex/getsysinfo = unknown
+hostinfo               = unknown
+/bin/machine           = unknown
+/usr/bin/oslevel       = unknown
+/bin/universe          = unknown
+
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
+
+## ------------ ##
+## Core tests.  ##
+## ------------ ##
+
+configure:941: PATH=".;."; conftest.sh
+/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
+configure:944: $? = 127
+configure:1024: checking build system type
+configure:1042: result: i686-pc-linux-gnu
+configure:1049: checking host system type
+configure:1063: result: i686-pc-linux-gnu
+configure:1070: checking target system type
+configure:1084: result: i686-pc-linux-gnu
+configure:1141: checking for gcc
+configure:1156: found /usr/bin/gcc
+configure:1164: result: gcc
+configure:1392: checking for C compiler version
+/bin/arch              = i686
+/usr/bin/arch -k       = unknown
+/usr/convex/getsysinfo = unknown
+hostinfo               = unknown
+/bin/machine           = unknown
+/usr/bin/oslevel       = unknown
+/bin/universe          = unknown
+
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
+
+## ------------ ##
+## Core tests.  ##
+## ------------ ##
+
+configure:941: PATH=".;."; conftest.sh
+/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
+configure:944: $? = 127
+configure:1024: checking build system type
+configure:1042: result: i686-pc-linux-gnu
+configure:1049: checking host system type
+configure:1063: result: i686-pc-linux-gnu
+configure:1070: checking target system type
+configure:1084: result: i686-pc-linux-gnu
+configure:1141: checking for gcc
+configure:1156: found /usr/bin/gcc
+configure:1164: result: gcc
+configure:1392: checking for C compiler version
+/bin/arch              = i686
+/usr/bin/arch -k       = unknown
+/usr/convex/getsysinfo = unknown
+hostinfo               = unknown
+/bin/machine           = unknown
+/usr/bin/oslevel       = unknown
+/bin/universe          = unknown
+
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
+
+## ------------ ##
+## Core tests.  ##
+## ------------ ##
+
+configure:941: PATH=".;."; conftest.sh
+/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
+configure:944: $? = 127
+configure:1024: checking build system type
+configure:1042: result: i686-pc-linux-gnu
+configure:1049: checking host system type
+configure:1063: result: i686-pc-linux-gnu
+configure:1070: checking target system type
+configure:1084: result: i686-pc-linux-gnu
+configure:1141: checking for gcc
+configure:1156: found /usr/bin/gcc
+configure:1164: result: gcc
+configure:1392: checking for C compiler version
+/bin/arch              = i686
+/usr/bin/arch -k       = unknown
+/usr/convex/getsysinfo = unknown
+hostinfo               = unknown
+/bin/machine           = unknown
+/usr/bin/oslevel       = unknown
+/bin/universe          = unknown
+
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
+
+## ------------ ##
+## Core tests.  ##
+## ------------ ##
+
+configure:941: PATH=".;."; conftest.sh
+/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
+configure:944: $? = 127
+configure:1024: checking build system type
+configure:1042: result: i686-pc-linux-gnu
+configure:1049: checking host system type
+configure:1063: result: i686-pc-linux-gnu
+configure:1070: checking target system type
+configure:1084: result: i686-pc-linux-gnu
+configure:1141: checking for gcc
+configure:1156: found /usr/bin/gcc
+configure:1164: result: gcc
+configure:1392: checking for C compiler version
+/bin/arch              = i686
+/usr/bin/arch -k       = unknown
+/usr/convex/getsysinfo = unknown
+hostinfo               = unknown
+/bin/machine           = unknown
+/usr/bin/oslevel       = unknown
+/bin/universe          = unknown
+
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
+
+## ------------ ##
+## Core tests.  ##
+## ------------ ##
+
+configure:941: PATH=".;."; conftest.sh
+/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
+configure:944: $? = 127
+configure:1024: checking build system type
+configure:1042: result: i686-pc-linux-gnu
+configure:1049: checking host system type
+configure:1063: result: i686-pc-linux-gnu
+configure:1070: checking target system type
+configure:1084: result: i686-pc-linux-gnu
+configure:1141: checking for gcc
+configure:1156: found /usr/bin/gcc
+configure:1164: result: gcc
+configure:1392: checking for C compiler version
+/bin/arch              = i686
+/usr/bin/arch -k       = unknown
+/usr/convex/getsysinfo = unknown
+hostinfo               = unknown
+/bin/machine           = unknown
+/usr/bin/oslevel       = unknown
+/bin/universe          = unknown
+
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
+
+## ------------ ##
+## Core tests.  ##
+## ------------ ##
+
+configure:941: PATH=".;."; conftest.sh
+/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
+configure:944: $? = 127
+configure:1024: checking build system type
+configure:1042: result: i686-pc-linux-gnu
+configure:1049: checking host system type
+configure:1063: result: i686-pc-linux-gnu
+configure:1070: checking target system type
+configure:1084: result: i686-pc-linux-gnu
+configure:1141: checking for gcc
+configure:1156: found /usr/bin/gcc
+configure:1164: result: gcc
+configure:1392: checking for C compiler version
+/bin/arch              = i686
+/usr/bin/arch -k       = unknown
+/usr/convex/getsysinfo = unknown
+hostinfo               = unknown
+/bin/machine           = unknown
+/usr/bin/oslevel       = unknown
+/bin/universe          = unknown
+
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
+
+## ------------ ##
+## Core tests.  ##
+## ------------ ##
+
+configure:941: PATH=".;."; conftest.sh
+/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
+configure:944: $? = 127
+configure:1024: checking build system type
+configure:1042: result: i686-pc-linux-gnu
+configure:1049: checking host system type
+configure:1063: result: i686-pc-linux-gnu
+configure:1070: checking target system type
+configure:1084: result: i686-pc-linux-gnu
+configure:1141: checking for gcc
+configure:1156: found /usr/bin/gcc
+configure:1164: result: gcc
+configure:1392: checking for C compiler version
+/bin/arch              = i686
+/usr/bin/arch -k       = unknown
+/usr/convex/getsysinfo = unknown
+hostinfo               = unknown
+/bin/machine           = unknown
+/usr/bin/oslevel       = unknown
+/bin/universe          = unknown
+
+PATH = /usr/local/bin:/usr/bin:/bin:/usr/X11R6/bin:/home/zhqun/bin
+
+## ------------ ##
+## Core tests.  ##
+## ------------ ##
+
+configure:941: PATH=".;."; conftest.sh
+/home/zhqun/otcl-1.8/configure: line 942: conftest.sh: command not found
+configure:944: $? = 127
+configure:1024: checking build system type
+configure:1042: result: i686-pc-linux-gnu
+configure:1049: checking host system type
+configure:1063: result: i686-pc-linux-gnu
+configure:1070: checking target system type
+configure:1084: result: i686-pc-linux-gnu
+configure:1141: checking for gcc
+configure:1156: found /usr/bin/gcc
+configure:1164: result: gcc
+c

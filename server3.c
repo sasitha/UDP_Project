@@ -81,13 +81,12 @@ int main(int argc, char **argv) {
 void server(int socket_id, float error_r) {
 
     int receive_id = 0, lenght, send_id = 0, end = 1, received_data = 0, error_packet = 0, number_of_packets;
-    int sq_root, random_number, is_error_detected = 0, number_of_error_packet = 0, error_packet_no = 0, i;
-    int last_error_seq = 0;
+    int sq_root, random_number, is_error_detected = 0, number_of_error_packet = 0, error_packet_no = 0, i, count;
     struct ack_so ack;
     struct sockaddr_in addres;
     struct packet receving_packet;
     char buffer[BUFSIZE], result[BUFSIZE];
-    long index = 0, index_at_error = 0;
+    long index = 0;
     float error_ratio , total_time = 0.0;
     struct timeval start_t, end_t;
     lenght = sizeof (struct sockaddr_in);
@@ -132,11 +131,6 @@ void server(int socket_id, float error_r) {
             break;
 
         }
-        
-        //if(last_error_seq == receving_packet.seq_num){
-          //  index = index_at_error;
-          //  last_error_seq = -1;
-      //  }
         /*generating the error packet no*/
         random_number = rand()%number_of_packets;
          // printf("error data\trand no %d\n\n", random_number);
@@ -149,15 +143,9 @@ void server(int socket_id, float error_r) {
             //printf("is error detected activated\n");
             number_of_error_packet++;
         }
-     
-        if(is_error_detected == 1){
-            //printf("do not copy data\n");
-            is_error_detected = 0;
-           // index_at_error = index;
-           // index += strlen(receving_packet.data)-1;
-            //last_error_seq = receving_packet.seq_num;
-        }
-        else{
+
+        if (is_error_detected == 0) {
+
             /*determine the amount of data which should be read from the packet */
             received_data = strlen(receving_packet.data)-1;
             /*copping data to the buffer*/
@@ -167,11 +155,11 @@ void server(int socket_id, float error_r) {
 
             /*printing data about the receiving packet*/
             printf("received packet with seq no %d\t"
-                    "and window end bit is %d\t"
+                   "and window end bit is %d\t"
                     "number of bit\t%d"
-                    "data \t%d\n", receving_packet.seq_num, receving_packet.window_end, receive_id, strlen(receving_packet.data));
+                    "number of packet \t%d\n", receving_packet.seq_num, receving_packet.window_end, receive_id, receving_packet.packet_number);
 
-        }            
+        }
 
         if (receving_packet.window_end == 1) {
 
@@ -241,5 +229,4 @@ double URandom(uint32_t *uPtr, double max){
 	*uPtr = (3141592653 * (*uPtr) + 2718281829) & MAXINT;
 	return ((double) *uPtr / (double) MAXINT * max);
 }
-
 
