@@ -22,10 +22,10 @@
 
 struct ack_so
 {	
-	uint8_t	ack_type ;
-	uint8_t error_seq_no;
-	uint8_t error_packet;
-	uint8_t len;
+	int	ack_type ;
+	int error_seq_no;
+	int error_packet;
+	int len;
 };
 
 struct packet
