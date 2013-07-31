@@ -100,8 +100,8 @@ int main(int argc, char **argv) {
  */
 void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
 
-    int recevi_id = 0, sendig_id = 0, packet_length, number_of_packets, packet_count = 0;
-    long file_size, current_index;
+    int recevi_id = 0, sendig_id = 0, packet_length, number_of_packets ;
+    long file_size, current_index, packet_count = 0;
     char *file_buffer;
     int seq_num = 0, window_count = 1;
     struct ack_so ack;
@@ -139,7 +139,7 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
         printf("error while sending packet\n");
     }
 
-    while (current_index <= file_size) {
+    while (packet_count <= number_of_packets) {
         if ((file_size + 1 - current_index) <= DATALEN) {
             packet_length = file_size + 1 - current_index;
         } else {
@@ -187,12 +187,13 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
                 printf("error while getting acknowledgment \n");
             } else {
                 printf("an acknowledgment received \n");
-                recevi_id = 0;
+                //recevi_id = 0;
                 /*rolling back if there is any error in a packet*/
                 if (ack.ack_type == 1) {
                     printf("no errors in the last window continuing file transmission \n");
                 } else {
                     printf("errors detected with packet no %d \n", ack.error_seq_no);
+                    printf("printing error data\t err seq no %d\t err packet no %d\n", ack.error_seq_no, ack.error_packet);
                     current_index = current_index - rollback(ack.error_seq_no, packet_length, &packet_count);
                     packet_count = ack.error_packet;
                     seq_num = (packet_count % MAX_SEQ_NO);
@@ -251,7 +252,7 @@ long rollback(int error_packet_no, int packet_length, int *number_of_packet) {
         } else {
             count++;
             packets--;
-            *number_of_packet--;
+            //*number_of_packet--;
         }
     }
     if (packet_length == DATALEN) {
