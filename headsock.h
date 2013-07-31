@@ -10,6 +10,8 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <arpa/inet.h>
+
 
 #define MYTCP_PORT 4950
 #define MYUDP_PORT 5350
@@ -32,5 +34,6 @@ struct packet
 	int	seq_num;
 	int	window_end;
 	int	no_of_packets;
-	int	packet_number;
+	long	packet_number;
+        
 };	

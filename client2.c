@@ -14,16 +14,17 @@
 #include "headsock.h"
 #define MAX_SEQ_NO  8
 #define WINDOW_SIZE 4
+
+
 void client(FILE *, int, struct sockaddr*, int);
 long rollback(int error_packet_no, int packet_length, int *number_of_packet);
 
 int main(int argc, char **argv) {
 
     int socket_id;
-    float trans_time, err_ratio;
     struct sockaddr_in server_address;
-    char str[INET6_ADDRSTRLEN];
     char **pptr;
+    char str[INET6_ADDRSTRLEN];
     struct hostent *server_host;
     struct in_addr **addres;
     struct FILE *fp;
@@ -36,7 +37,6 @@ int main(int argc, char **argv) {
 
     /*gathering host information and printing them out if there is any error in
      host informations print the error and exit */
-
     server_host = gethostbyname(argv[1]);
     if (server_host == NULL) {
         printf("error while getting host address by name\n");
@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
         case AF_INET:
             printf("AF_INTET\n");
             for (pptr = server_host->h_addr_list; *pptr != NULL; pptr++) {
-//                printf("address:%d\n", inet_ntop(server_host->h_addrtype, *pptr, str, sizeof (str)));
+                printf("address:%d\n", inet_ntop(server_host->h_addrtype, *pptr, str, sizeof (str)));
             }
 
             break;
@@ -82,7 +82,6 @@ int main(int argc, char **argv) {
     bzero(&(server_address.sin_zero), 8);
 
     /*opening the file */
-
     if ((fp = fopen("myfile.txt", "r+t")) == NULL) {
         printf("file does not exits\n");
         exit(1);
@@ -91,17 +90,17 @@ int main(int argc, char **argv) {
     /*invoking the client function to transmit the file*/
     client(fp, socket_id, (struct sockaddr *) &server_address, sizeof (struct sockaddr_in));
 
-    /*closing the socket and exiting from the programm*/
+    /*closing the socket and exiting from the program*/
     close(socket_id);
     exit(0);
 
 }
 
-/*this function will handle the transmit of the fille
+/*this function will handle the transmission of the fille
  */
 void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
 
-    int recevi_id = 0, sendig_id = 0, packet_length, number_of_packets, packet_count = 0, is_error_detected = 0;
+    int recevi_id = 0, sendig_id = 0, packet_length, number_of_packets, packet_count = 0;
     long file_size, current_index;
     char *file_buffer;
     int seq_num = 0, window_count = 1;
@@ -109,7 +108,6 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
     struct packet sending_packet;
     current_index = 0;
 
-    
     /*finding the size of the file */
     fseek(fp, 0, SEEK_END);
     file_size = ftell(fp);
@@ -141,7 +139,7 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
         printf("error while sending packet\n");
     }
 
-    while (packet_count <= number_of_packets) {
+    while (current_index <= file_size) {
         if ((file_size + 1 - current_index) <= DATALEN) {
             packet_length = file_size + 1 - current_index;
         } else {
@@ -174,7 +172,8 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
             /*printing the data about the sending packet and sending the packet to the server*/
             printf("sending packet with seq_no %d\t"
                     "window count %d\t"
-                    "window end bit is %d\n", sending_packet.seq_num, window_count, sending_packet.window_end);
+                    "window end bit is %d\t"
+                    "packet count %d\n", sending_packet.seq_num, window_count, sending_packet.window_end, sending_packet.packet_number);
             sendig_id = sendto(socket_id, &sending_packet, sizeof (struct packet), 0, addres, addres_len);
             /*check for errors while transmitting the packet*/
             if (sendig_id == -1) {
@@ -185,18 +184,18 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
             recevi_id = recvfrom(socket_id, &ack, sizeof (struct ack_so), 0, NULL, NULL);
             /*check for the errors while receiving the acknowledgment*/
             if (recevi_id == -1) {
-                printf("error while getting ack\n");
+                printf("error while getting acknowledgment \n");
             } else {
-                printf("ack recived\n");
+                printf("an acknowledgment received \n");
                 recevi_id = 0;
-                /*rooling backe if anny error*/
+                /*rolling back if there is any error in a packet*/
                 if (ack.ack_type == 1) {
-                    printf("no errors in the last window continuing file transmition\n");
+                    printf("no errors in the last window continuing file transmission \n");
                 } else {
-                    printf("errors ditected with packet no %d \n", ack.error_seq_no);
+                    printf("errors detected with packet no %d \n", ack.error_seq_no);
                     current_index = current_index - rollback(ack.error_seq_no, packet_length, &packet_count);
                     packet_count = ack.error_packet;
-                    seq_num = (packet_count % MAX_SEQ_NO); 
+                    seq_num = (packet_count % MAX_SEQ_NO);
                 }
             }
             /*make window count to 1 again */
@@ -205,7 +204,8 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
             /*printing data about the sending packet and sending the packet*/
             printf("sending packet with seq_no %d\t"
                     "window count %d\t"
-                    "window end bit is %d\n", sending_packet.seq_num, window_count, sending_packet.window_end);
+                    "window end bit is %d\t"
+                    "packet count %d \n", sending_packet.seq_num, window_count, sending_packet.window_end, sending_packet.packet_number);
             sendig_id = sendto(socket_id, &sending_packet, sizeof (struct packet), 0, addres, addres_len);
             /*checking for the errors while transmitting the packet*/
             if (sendig_id == -1) {
@@ -218,7 +218,7 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
 
     }
     /*once the total file is transmitted send a special packet to the server indicating the 
-     *file has been completly send out */
+     *file has been completely send out */
     sending_packet.seq_num = -1;
     sending_packet.window_end = 1;
 
@@ -228,7 +228,7 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
     }
     recevi_id = recvfrom(socket_id, &ack, 0, sizeof (struct ack_so), NULL, NULL);
     if (recevi_id == -1) {
-        printf("error while receving ack\n");
+        printf("error while receiving acknowledgment\n");
     } else {
         printf("file transfer complete\n");
     }
