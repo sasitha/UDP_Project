@@ -136,7 +136,6 @@ void server(int socket_id, float error_r) {
             error_packet = receving_packet.seq_num;
             error_packet_no = receving_packet.packet_number;
             is_error_detected = 1;
-
             number_of_error_packet++;
         }
 
@@ -152,17 +151,17 @@ void server(int socket_id, float error_r) {
 
         if (receving_packet.window_end == 1) {
 
-            if (error_packet != 0) {
+            if (error_packet != 0) {        
                 /*error packet*/
                 ack.ack_type = 0;
                 ack.error_seq_no = error_packet;
                 ack.error_packet = error_packet_no;
-
-                send_id = sendto(socket_id, &ack, sizeof (struct ack_so), 0, (struct sockaddr*) &addres, lenght);
+                send_id = sendto(socket_id, &ack, sizeof (struct ack_so), 0, (struct sockaddr*) &addres, lenght);                
                 if (send_id == -1) {
                     printf("acknowledgment sending fail\n");
                 }
                 error_packet = 0;
+                error_packet_no = 0;
                 is_error_detected = 0;
 
             } else {
@@ -186,7 +185,7 @@ void server(int socket_id, float error_r) {
         exit(0);
     }
     strcat(buffer, "\n");
-    fwrite(buffer, 1, index + 1, fp);
+    fwrite(buffer, 1, index, fp);
     fclose(fp);
     printf("file has completely saved\n");
     gettimeofday(&end_t, NULL);
@@ -198,7 +197,7 @@ void server(int socket_id, float error_r) {
     speed = (number_of_packets * DATALEN) / total_time;
     printf("number of error packets %d\ntotal packets %d\n", number_of_error_packet, number_of_packets);
     printf("total time taken %.1f \n", total_time);
-    printf("speed %d \n\n\n\n", speed);
+    printf("speed in byte per millisecond %d \n\n\n\n", speed);
 
 
     /*saving results to log file*/
@@ -215,7 +214,7 @@ void server(int socket_id, float error_r) {
     fprintf(fp2, "%d", number_of_error_packet);
     fprintf(fp2, "%s", "\n");
 
-    fprintf(fp2, "%s", "transmission speed bits per second\t\t");
+    fprintf(fp2, "%s", "transmission speed in byte per millisecond\t\t");
     fprintf(fp2, "%d", speed);
     fprintf(fp2, "%s", "\n\n\n\n");
 
