@@ -1,35 +1,112 @@
 simulation started with error ratio		0.100
-total time taken to receive the file		66.625
-number of error packet generated		78
-transmission speed bits per second		896
+total time taken to receive the file		65.625
+number of error packet generated		65
+transmission speed in byte per millisecond		909
+
+
+
+simulation started with error ratio		0.100
+total time taken to receive the file		51.572
+number of error packet generated		53
+transmission speed in byte per millisecond		1157
+
+
+
+simulation started with error ratio		0.100
+total time taken to receive the file		59.991
+number of error packet generated		55
+transmission speed in byte per millisecond		995
+
+
+
+simulation started with error ratio		0.100
+total time taken to receive the file		65.704
+number of error packet generated		85
+transmission speed in byte per millisecond		908
+
+
+
+simulation started with error ratio		0.100
+total time taken to receive the file		69.193
+number of error packet generated		65
+transmission speed in byte per millisecond		862
+
+
+
+simulation started with error ratio		0.100
+total time taken to receive the file		76.153
+number of error packet generated		67
+transmission speed in byte per millisecond		783
+
+
+
+simulation started with error ratio		0.000
+total time taken to receive the file		662.807
+number of error packet generated		2
+transmission speed in byte per millisecond		541
+
+
+
+simulation started with error ratio		0.000
+total time taken to receive the file		1411.825
+number of error packet generated		0
+transmission speed in byte per millisecond		466
+
+
+
+simulation started with error ratio		0.100
+total time taken to receive the file		1810.513
+number of error packet generated		731
+transmission speed in byte per millisecond		363
 
 
 
 simulation started with error ratio		0.200
-total time taken to receive the file		71.719
-number of error packet generated		170
-transmission speed bits per second		832
+total time taken to receive the file		2445.938
+number of error packet generated		1662
+transmission speed in byte per millisecond		269
 
 
 
 simulation started with error ratio		0.300
-total time taken to receive the file		179.784
-number of error packet generated		266
-transmission speed bits per second		332
+total time taken to receive the file		3298.121
+number of error packet generated		2766
+transmission speed in byte per millisecond		199
 
 
 
 simulation started with error ratio		0.400
-total time taken to receive the file		245.597
-number of error packet generated		384
-transmission speed bits per second		243
+total time taken to receive the file		4694.229
+number of error packet generated		4411
+transmission speed in byte per millisecond		140
 
 
 
 simulation started with error ratio		0.500
-total time taken to receive the file		450.358
-number of error packet generated		664
-transmission speed bits per second		132
+total time taken to receive the file		6924.817
+number of error packet generated		6591
+transmission speed in byte per millisecond		95
+
+
+
+simulation started with error ratio		0.000
+total time taken to receive the file		1299.694
+number of error packet generated		4
+transmission speed in byte per millisecond		506
+
+
+
+simulation started with error ratio		0.100
+total time taken to receive the file		1888.106
+number of error packet generated		740
+transmission speed in byte per millisecond		348
+
+
+
+simulation started with error ratio		0.200
+total time taken to receive the file		2421.832
+number of error packet generated		1647
+transmission speed in byte per millisecond		271
 
 
 

@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
         case AF_INET:
             printf("AF_INTET\n");
             for (pptr = server_host->h_addr_list; *pptr != NULL; pptr++) {
-//                printf("address:%d\n", inet_ntop(server_host->h_addrtype, *pptr, str, sizeof (str)));
+                //                printf("address:%d\n", inet_ntop(server_host->h_addrtype, *pptr, str, sizeof (str)));
             }
 
             break;
@@ -83,7 +83,7 @@ int main(int argc, char **argv) {
 
     /*opening the file */
 
-    if ((fp = fopen("myfile.txt", "r+t")) == NULL) {
+    if ((fp = fopen("myfile2.txt", "r+t")) == NULL) {
         printf("file does not exits\n");
         exit(1);
     }
@@ -109,7 +109,7 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
     struct packet sending_packet;
     current_index = 0;
 
-    
+
     /*finding the size of the file */
     fseek(fp, 0, SEEK_END);
     file_size = ftell(fp);
@@ -147,43 +147,41 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
         } else {
             packet_length = DATALEN;
         }
-        
-        if(re_transmited == 1){
-           // printf("retransmitting \n");
+
+        if (re_transmited == 1) {
+            // printf("retransmitting \n");
             re_transmited = 0;
-            memcpy(sending_packet.data, (file_buffer+current_index), packet_length);
+            memcpy(sending_packet.data, (file_buffer + current_index), packet_length);
             seq_num = (packet_count % MAX_SEQ_NO) + 1;
             sending_packet.seq_num = seq_num;
             sending_packet.window_end = 0;
             sending_packet.packet_number = packet_count;
-            
+
             printf("re transmitting packet with seq no %d\n", seq_num);
-            
-            
+
+
             /*going back to first place*/
             printf("rolling forward\n");
             current_index = current_index_bk;
             packet_count = packet_count_bk;
             re_transmited = 0;
-        }else{
+        } else {
             /*copying the data from the file to the packet */
-                memcpy(sending_packet.data, (file_buffer + current_index), packet_length);
-                /*increase the current index of the place start to read the data from the file*/
-                current_index += packet_length;
-                /*modifying the fields of the sending packet*/
-                seq_num = (packet_count % MAX_SEQ_NO) + 1;
-                sending_packet.seq_num = seq_num;
-                sending_packet.window_end = 0;
-                sending_packet.packet_number = packet_count;
+            memcpy(sending_packet.data, (file_buffer + current_index), packet_length);
+            /*increase the current index of the place start to read the data from the file*/
+            current_index += packet_length;
+            /*modifying the fields of the sending packet*/
+            seq_num = (packet_count % MAX_SEQ_NO) + 1;
+            sending_packet.seq_num = seq_num;
+            sending_packet.window_end = 0;
+            sending_packet.packet_number = packet_count;
 
-                /*increasing the packet count */
-                packet_count++;
-                /*maximum window size is 5. after reaching the maximum window size 
-                *this client program will wait until the server sends a acknowledge signal
-                */
+            /*increasing the packet count */
+            packet_count++;
+            /*maximum window size is 5. after reaching the maximum window size 
+             *this client program will wait until the server sends a acknowledge signal
+             */
         }
-        
-
         
         if (window_count == WINDOW_SIZE || packet_count == number_of_packets) {
             /*window_end field in the transmitting packet will tell the server 
@@ -192,8 +190,8 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
             sending_packet.window_end = 1;
             /*printing the data about the sending packet and sending the packet to the server*/
             printf("sending packet with seq_no %d\t"
-                    "window count %d\t"
-                    "window end bit is %d\n", sending_packet.seq_num, window_count, sending_packet.window_end);
+                    "window end bit is %d\t"
+                    "packet no %d\n", sending_packet.seq_num, window_count, sending_packet.packet_number);
             sendig_id = sendto(socket_id, &sending_packet, sizeof (struct packet), 0, addres, addres_len);
             /*check for errors while transmitting the packet*/
             if (sendig_id == -1) {
@@ -217,12 +215,12 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
                     current_index_bk = current_index;
                     packet_count_bk = packet_count;
                     //seq_num_bk = seq_num;
-                    
+
                     /*modifying to re transmit*/
                     current_index = current_index - rollback(ack.error_seq_no, packet_length, &packet_count);
                     packet_count = ack.error_packet;
                     seq_num = (packet_count % MAX_SEQ_NO);
-                    
+
                     /*remembering retransmit status*/
                     re_transmited = 1;
                 }
@@ -231,9 +229,9 @@ void client(FILE *fp, int socket_id, struct sockaddr *addres, int addres_len) {
             window_count = 1;
         } else {
             /*printing data about the sending packet and sending the packet*/
-            printf("sending packet with seq_no %d\t"
-                    "window count %d\t"
-                    "window end bit is %d\n", sending_packet.seq_num, window_count, sending_packet.window_end);
+             printf("sending packet with seq_no %d\t"
+                    "window end bit is %d\t"
+                    "packet no %d\n", sending_packet.seq_num, window_count, sending_packet.packet_number);
             sendig_id = sendto(socket_id, &sending_packet, sizeof (struct packet), 0, addres, addres_len);
             /*checking for the errors while transmitting the packet*/
             if (sendig_id == -1) {

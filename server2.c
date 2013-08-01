@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
     }
 
     /*setting up initial error ratio*/
-    error_ratio = 0.1;
+    error_ratio = 0.00;
 
     /*calling server function to handle the client*/
     while (1) {
@@ -107,6 +107,14 @@ void server(int socket_id, float error_r) {
     number_of_packets = receving_packet.no_of_packets;
     printf("number of packets about to received\t%d\n\n", number_of_packets);
     sq_root = sqrt(number_of_packets);
+    
+    /*opening the save file*/
+    fp = fopen("myfile2_res.txt", "wt");
+    if (fp == NULL) {
+        printf("file does not exists \n");
+        exit(0);
+    }
+    
     /*waiting for the client to sent packets until it send the complete file */
     while (end) {
         /*receiving the packet*/
@@ -144,7 +152,9 @@ void server(int socket_id, float error_r) {
             /*determine the amount of data which should be read from the packet */
             received_data = strlen(receving_packet.data) - 1;
             /*copping data to the buffer*/
-            memmove((buffer + index), receving_packet.data, received_data);
+            memcpy(buffer, receving_packet.data, received_data);
+            /*writing data to a file*/
+             fwrite(buffer, 1, received_data, fp);
             /*increasing the index of the buffer*/
             index += received_data;
         }
@@ -178,14 +188,9 @@ void server(int socket_id, float error_r) {
         }
 
     }
-    /*after receiving all the packets save it in a file*/
-    fp = fopen("My_receve_file.txt", "wt");
-    if (fp == NULL) {
-        printf("file does not exists \n");
-        exit(0);
-    }
+    
     strcat(buffer, "\n");
-    fwrite(buffer, 1, index, fp);
+   
     fclose(fp);
     printf("file has completely saved\n");
     gettimeofday(&end_t, NULL);

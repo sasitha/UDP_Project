@@ -2060,4 +2060,21 @@ ac_cv_prog_ac_ct_RANLIB=ranlib
 ac_cv_prog_cc_g=yes
 ac_cv_prog_cxx_g=yes
 ac_cv_target=i686-pc-linux-gnu
-ac_cv_ta
+ac_cv_target_alias=i686-pc-linux-gnu
+
+## ------------ ##
+## confdefs.h.  ##
+## ------------ ##
+
+#ifdef __cplusplus
+#include <stdlib.h>
+#endif
+#define STDC_HEADERS 1
+#define HAVE_STRING_H 1
+#define HAVE_TCL_H 1
+#define HAVE_LIBTCL8_4 1
+#define HAVE_TK_H 1
+#define HAVE_LIBTK8_4 1
+
+
+configure: exit 0

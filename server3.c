@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
     
     
     /*setting up initial error ratio*/
-    error_ratio = 0.1;
+    error_ratio = 0.0;
     
     /*calling server function to handle the client*/
     while(1){
@@ -91,6 +91,7 @@ void server(int socket_id, float error_r) {
     struct timeval start_t, end_t;
     lenght = sizeof (struct sockaddr_in);
     FILE *fp, *fp2;
+    int speed;
     
     clock_t start_c, end_c;
     
@@ -107,7 +108,15 @@ void server(int socket_id, float error_r) {
     number_of_packets = receving_packet.no_of_packets;
     printf("number of packets about to received\t%d\n\n", number_of_packets);
     sq_root = sqrt(number_of_packets);
-
+    
+    /*opening save file file*/
+    fp = fopen("myfile2_res.txt", "wt");
+    if (fp == NULL) {
+        printf("file does not exsists\n");
+        exit(0);
+    }
+    strcat(buffer, "\n");
+    
     /*waiting for the client to sent packets until it send the complete file */
     while (end) {
         /*receiving the packet*/
@@ -135,30 +144,34 @@ void server(int socket_id, float error_r) {
         random_number = rand()%number_of_packets;
          // printf("error data\trand no %d\n\n", random_number);
         
-        if ((random_number <= error_ratio * number_of_packets) && is_error_detected == 0) {
+        if (random_number < error_ratio * number_of_packets) {
            // printf("error packet is generated with seq no %d \n", receving_packet.seq_num);
             error_packet = receving_packet.seq_num;
             error_packet_no = receving_packet.packet_number;
-            is_error_detected = 1;
-            //printf("is error detected activated\n");
             number_of_error_packet++;
-        }
+            
+          //  printf("discard packet with seq no %d\t"
+             //      "and window end bit is %d\t"
+               //     "number of bit\t%d"
+                //    "number of packet \t%d\n", receving_packet.seq_num, receving_packet.window_end, receive_id, receving_packet.packet_number);
 
-        if (is_error_detected == 0) {
-
+            
+        }else{
             /*determine the amount of data which should be read from the packet */
             received_data = strlen(receving_packet.data)-1;
             /*copping data to the buffer*/
-            memmove((buffer + index), receving_packet.data, received_data);
+            memmove(buffer , receving_packet.data, received_data);
             /*increasing the index of the buffer*/
             index += received_data;
 
             /*printing data about the receiving packet*/
-            printf("received packet with seq no %d\t"
-                   "and window end bit is %d\t"
-                    "number of bit\t%d"
-                    "number of packet \t%d\n", receving_packet.seq_num, receving_packet.window_end, receive_id, receving_packet.packet_number);
-
+           // printf("saved packet with seq no %d\t"
+                 //  "and window end bit is %d\t"
+                  //  "number of bit\t%d"
+                  //  "number of packet \t%d\n", receving_packet.seq_num, receving_packet.window_end, receive_id, receving_packet.packet_number);
+            fseek(fp, (receving_packet.packet_number*DATALEN), SEEK_SET);
+            fwrite(buffer, 1, received_data, fp);
+            rewind(fp);
         }
 
         if (receving_packet.window_end == 1) {
@@ -168,7 +181,7 @@ void server(int socket_id, float error_r) {
                 ack.ack_type = 0;
                 ack.error_seq_no = error_packet;
                 ack.error_packet = error_packet_no;
-                printf("detected errors sending negative ack with error packet sequence number %d \n", ack.error_seq_no);
+              //  printf("detected errors sending negative ack with error packet sequence number %d packet count %d\n", ack.error_seq_no, ack.error_packet);
                 send_id = sendto(socket_id, &ack, sizeof (struct ack_so), 0, (struct sockaddr*) &addres, lenght);
                 if (send_id == -1) {
                     printf("ack sending fail\n");
@@ -178,7 +191,7 @@ void server(int socket_id, float error_r) {
                 // printf("is error detected disabled\n");
             } else {
                 /*no errors*/
-                printf("no errors sending positive ack\n");
+               // printf("no errors sending positive ack\n");
                 ack.ack_type = 1;
                 send_id = sendto(socket_id, &ack, sizeof (struct ack_so), 0, (struct sockaddr*) &addres, lenght);
                 if (send_id == -1) {
@@ -190,14 +203,9 @@ void server(int socket_id, float error_r) {
         }
 
     }
-    /*after receiving all the packets save it in a file*/
-    fp = fopen("My_receve_file.txt", "wt");
-    if (fp == NULL) {
-        printf("file does not exsists\n");
-        exit(0);
-    }
-    strcat(buffer, "\n");
-    fwrite(buffer, 1, index+1, fp);
+    
+    
+    
     fclose(fp);
     // printf("file has completely saved\n");
     gettimeofday(&end_t, NULL);
@@ -205,13 +213,13 @@ void server(int socket_id, float error_r) {
    // printf("start time %d end time %d\n", start_t.tv_sec, end_t.tv_sec);
     calculate_time( &end_t, &start_t);
     total_time  = (end_t.tv_sec)*1000.0 + (end_t.tv_usec)/1000.0 ;
-    
+    speed = (number_of_packets * DATALEN) / total_time;
     
     
     
     printf("number of error packets %d\ntotal packets %d\n", number_of_error_packet, number_of_packets);
-    printf("total time taken %.1f \n\n\n\n", total_time );
-    
+    printf("total time taken %.1f \n", total_time );
+    printf("speed in byte per millisecond %d \n\n\n\n", speed);
 }
 
 void calculate_time(struct timeval *end, struct timeval *start){

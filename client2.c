@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
     bzero(&(server_address.sin_zero), 8);
 
     /*opening the file */
-    if ((fp = fopen("myfile.txt", "r+t")) == NULL) {
+    if ((fp = fopen("myfile2.txt", "r+t")) == NULL) {
         printf("file does not exits\n");
         exit(1);
     }
