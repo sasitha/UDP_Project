@@ -3,6 +3,8 @@
  *.............................and performance study
  * Registration Number :.......E/09/417
  *.............................Gunadasa M.M.G.S.M
+ * 
+ * PART I hypothetical reliable data transfer protocol
  */
 
 /*This client program will use a UDP socket to connect to the server
@@ -13,7 +15,7 @@
 
 #include "headsock.h"
 #define MAX_SEQ_NO  8
-#define WINDOW_SIZE 4
+#define WINDOW_SIZE 5
 
 
 void client(FILE *, int, struct sockaddr*, int);
@@ -82,7 +84,7 @@ int main(int argc, char **argv) {
     bzero(&(server_address.sin_zero), 8);
 
     /*opening the file */
-    if ((fp = fopen("myfile2.txt", "r+t")) == NULL) {
+    if ((fp = fopen("myfile.txt", "r+t")) == NULL) {
         printf("file does not exits\n");
         exit(1);
     }

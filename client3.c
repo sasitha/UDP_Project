@@ -3,17 +3,18 @@
  *.............................and performance study
  * Registration Number :.......E/09/417
  *.............................Gunadasa M.M.G.S.M
+ * 
+ * PART II Developed hypothetical reliable data transfer protocol
  */
 
 /*This client program will use a UDP socket to connect to the server
  *this will transmit the text file named as "myfile" to the server
- *sequence numbers will go form 1 to 9
- *window size will be 6
+ *
  */
 
 #include "headsock.h"
 #define MAX_SEQ_NO  8
-#define WINDOW_SIZE 4
+#define WINDOW_SIZE 5
 void client(FILE *, int, struct sockaddr*, int);
 long rollback(int error_packet_no, int packet_length, int *number_of_packet);
 
@@ -83,7 +84,7 @@ int main(int argc, char **argv) {
 
     /*opening the file */
 
-    if ((fp = fopen("myfile2.txt", "r+t")) == NULL) {
+    if ((fp = fopen("myfile3.txt", "r+t")) == NULL) {
         printf("file does not exits\n");
         exit(1);
     }

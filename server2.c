@@ -3,6 +3,8 @@
  *.............................and performance study
  * Registration Number :.......E/09/417
  *.............................Gunadasa M.M.G.S.M
+ * 
+ * PART I hypothetical reliable data transfer protocol
  */
 
 /*this server program connect with its client program using a UDP sockets
@@ -109,7 +111,7 @@ void server(int socket_id, float error_r) {
     sq_root = sqrt(number_of_packets);
     
     /*opening the save file*/
-    fp = fopen("myfile2_res.txt", "wt");
+    fp = fopen("myfile_res.txt", "wt");
     if (fp == NULL) {
         printf("file does not exists \n");
         exit(0);

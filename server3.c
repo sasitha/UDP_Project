@@ -3,6 +3,8 @@
  *.............................and performance study
  * Registration Number :.......E/09/417
  *.............................Gunadasa M.M.G.S.M
+ * 
+ * PART II Developed hypothetical reliable data transfer protocol
  */
 
 /*this server program connect with its client program using a UDP sockets
@@ -110,7 +112,7 @@ void server(int socket_id, float error_r) {
     sq_root = sqrt(number_of_packets);
     
     /*opening save file file*/
-    fp = fopen("myfile2_res.txt", "wt");
+    fp = fopen("myfile3_res.txt", "wt");
     if (fp == NULL) {
         printf("file does not exsists\n");
         exit(0);
@@ -220,6 +222,28 @@ void server(int socket_id, float error_r) {
     printf("number of error packets %d\ntotal packets %d\n", number_of_error_packet, number_of_packets);
     printf("total time taken %.1f \n", total_time );
     printf("speed in byte per millisecond %d \n\n\n\n", speed);
+    
+     /*saving results to log file*/
+    fp2 = fopen("result_log_imp.txt", "a+");
+    fprintf(fp2, "%s", "simulation started with error ratio\t\t");
+    fprintf(fp2, "%.3f", error_ratio);
+    fprintf(fp2, "%s", "\n");
+
+    fprintf(fp2, "%s", "total time taken to receive the file\t\t");
+    fprintf(fp2, "%.3f", total_time);
+    fprintf(fp2, "%s", "\n");
+
+    fprintf(fp2, "%s", "number of error packet generated\t\t");
+    fprintf(fp2, "%d", number_of_error_packet);
+    fprintf(fp2, "%s", "\n");
+
+    fprintf(fp2, "%s", "transmission speed in byte per millisecond\t\t");
+    fprintf(fp2, "%d", speed);
+    fprintf(fp2, "%s", "\n\n\n\n");
+
+    fclose(fp2);
+
+
 }
 
 void calculate_time(struct timeval *end, struct timeval *start){
