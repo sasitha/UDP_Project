@@ -84,7 +84,7 @@ int main(int argc, char **argv) {
 
     /*opening the file */
 
-    if ((fp = fopen("myfile3.txt", "r+t")) == NULL) {
+    if ((fp = fopen("myfile.txt", "r+t")) == NULL) {
         printf("file does not exits\n");
         exit(1);
     }
